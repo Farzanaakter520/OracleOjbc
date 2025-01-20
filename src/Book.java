@@ -8,9 +8,9 @@ public class Book {
     public void insertDummyData(String[][] Books) {
         String insertQuery = "INSERT INTO Book1 (name, auther_name, genre, price, publish_date) VALUES (?, ?, ?, ?, ?)";
 
-        try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)){
-            for(String[] Book : Books ){
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+            for (String[] Book : Books) {
                 preparedStatement.setString(1, Book[0]);
                 preparedStatement.setString(2, Book[1]);
                 preparedStatement.setString(3, Book[2]);
@@ -22,7 +22,7 @@ public class Book {
             int[] rowsInserted = preparedStatement.executeBatch();
             System.out.println("Rows inserted: " + rowsInserted.length);
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.err.println(" Error inserting data : " + e.getMessage());
         }
     }
