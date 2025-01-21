@@ -1,29 +1,66 @@
-import java.sql.*;
-
 public class Book {
-    private static final String URL = "jdbc:oracle:thin:@//localhost:1521/ORCLPDB";
-    private static final String USER = "hr";
-    private static final String PASSWORD = "isdb62";
+    private int id;
+    private String title;
+    private String author;
+    private double price;
+    private boolean available;
 
-    public void insertDummyData(String[][] Books) {
-        String insertQuery = "INSERT INTO Book1 (name, auther_name, genre, price, publish_date) VALUES (?, ?, ?, ?, ?)";
+    public Book() {
+    }
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-            for (String[] Book : Books) {
-                preparedStatement.setString(1, Book[0]);
-                preparedStatement.setString(2, Book[1]);
-                preparedStatement.setString(3, Book[2]);
-                preparedStatement.setInt(4, Integer.parseInt(Book[3]));
-                preparedStatement.setDate(5, Date.valueOf(Book[4]));
+    public Book(String title, String author, double price, boolean available) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.available = available;
+    }
 
-                preparedStatement.addBatch();
-            }
-            int[] rowsInserted = preparedStatement.executeBatch();
-            System.out.println("Rows inserted: " + rowsInserted.length);
+    public Book(int id, String title, String author, double price, boolean available) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.available = available;
+    }
 
-        } catch (SQLException e) {
-            System.err.println(" Error inserting data : " + e.getMessage());
-        }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

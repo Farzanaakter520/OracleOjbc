@@ -1,12 +1,12 @@
 import java.sql.*;
 
-public class InsertFruitOracle extends Oracle{
-    public void insertDummyData(String csvData) {
+public class InsertFruitOracle extends OracleConnection {
+    public void insertDummyData(String[][] fruits) {
         String insertQuery = "INSERT INTO fruit_shop (id, name, buyer, seller, price, buydate, selldate) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-            for (String[] fruit : csvData) {
+            for (String[] fruit : fruits) {
                 preparedStatement.setInt(1, Integer.parseInt(fruit[0]));
                 preparedStatement.setString(2, fruit[1]);
                 preparedStatement.setString(3, fruit[2]);

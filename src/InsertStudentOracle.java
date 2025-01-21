@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertStudentOracle extends Oracle {
+public class InsertStudentOracle extends OracleConnection {
 
 
     public void insertDummyData(String[][] students) {
@@ -24,5 +24,42 @@ public class InsertStudentOracle extends Oracle {
         } catch (SQLException e) {
             System.err.println(" Error inserting data : " + e.getMessage());
         }
+    }
+
+    int id;
+    String name;
+    int age;
+    String email;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

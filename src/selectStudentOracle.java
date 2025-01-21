@@ -1,7 +1,6 @@
 import java.sql.*;
-import java.util.Collection;
 
-public class selectStudentOracle extends Oracle {
+public class selectStudentOracle extends OracleConnection {
 
     public void selectAllStudents() {
         String selectQuery = "SELECT * FROM studentjdbc1";
