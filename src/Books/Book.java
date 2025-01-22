@@ -1,3 +1,5 @@
+package Books;
+
 public class Book {
     private int id;
     private String title;
@@ -63,4 +65,5 @@ public class Book {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
 }
