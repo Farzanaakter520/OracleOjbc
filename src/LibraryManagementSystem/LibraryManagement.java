@@ -10,17 +10,21 @@ public class LibraryManagement {
             new Book("1984", "George Orwell", 1949, 328, 8.99, true)
     };
 
-static void listOfBook(){
-    System.out.println(Arrays.toString(books));
+    static void listOfBook() {
+        for (Book book : books) {
+            System.out.println(book.toString());
+        }
     }
 
-    public void borrowBook(Scanner scanner) {
+    public void borrowBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the title of the book ");
         String title = scanner.nextLine();
         boolean found = false;
 
         for (Book book : books) {
-            if (book != null) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                found = true;
                 if (book.isAvailable()) {
                     book.setAvailable(false);
                     System.out.println("\nYou have successfully borrowed '" + title + "'.");
@@ -30,32 +34,34 @@ static void listOfBook(){
             } else {
                 System.out.println("\nThe book '" + title + "' does not exist in the library.");
             }
+            break;
         }
     }
 
-    public void returnBook(Scanner scanner) {
+    public void returnBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the title of the book ");
         String title = scanner.nextLine();
         boolean found = false;
-        for(Book book : books){
-            if (book != null) {
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                found = true;
                 if (!book.isAvailable()) {
                     book.setAvailable(true);
-                    System.out.println("You have successfully returned " + title);
+                    System.out.println("Thank you for returning '" + book.getTitle() + "'.");
                 } else {
-                    System.out.println("The book " + title + " was not borrowed.");
+                    System.out.println("'" + book.getTitle() + "' was not borrowed.");
                 }
-            } else {
-                System.out.println("The book " + title + " does not exist in the library.");
+                break;
             }
         }
     }
 
 
-    public void mainMenu(){
+    public void mainMenu() {
         Scanner scanner = new Scanner(System.in);
 
-        while(true){
+        while (true) {
             System.out.println("Three options are available ");
             System.out.println("1. List of books");
             System.out.println("2. Borrow a book");
@@ -66,22 +72,18 @@ static void listOfBook(){
             int Choice = scanner.nextInt();
             scanner.nextLine();
 
-            switch (Choice){
+            switch (Choice) {
                 case 1:
                     listOfBook();
                     break;
 
                 case 2:
-                    System.out.println("Enter the title of the book you want to borrow ");
-                    String borrowTitle = scanner.nextLine();
-                    borrowBook(scanner);
+                    borrowBook();
                     break;
 
                 case 3:
-                    System.out.println("Enter the title of the book you want to return ");
-                    String returnTitle = scanner.nextLine();
-                    returnBook(scanner);
-
+                    returnBook();
+                    break;
                 case 4:
                     System.out.println("Exiting the programme");
                     scanner.close();
